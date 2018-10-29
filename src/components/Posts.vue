@@ -47,14 +47,15 @@
         },
         created() {
             getTotalCount('posts').then((total) => {
-                console.log('created getTotalCount');
                 this.total = total;
-                const page = this.getParamPage();
-
-                if (this.currentPage === page)
-                    this.changePage(page);
-                else
-                    this.currentPage = page;
+                
+                this.$nextTick(() => {
+                    const page = this.getParamPage();
+                    if (this.currentPage === page)
+                        this.changePage(page);
+                    else
+                        this.currentPage = page;
+                });
             });
         },
         beforeRouteUpdate(to, from, next) {
